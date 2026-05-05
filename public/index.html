@@ -423,20 +423,19 @@
 </div>
 
 <script>
-  function goProxy() {
+ function goProxy() {
     let val = document.getElementById('proxyInput').value.trim();
     if (!val) return;
     if (!val.startsWith('http')) val = 'https://' + val;
-    const encoded = '/service/' + btoa(val);
+    const encoded = __uv$config.prefix + __uv$config.encodeUrl(val);
     openFrame(encoded, val);
   }
 
   function go(site) {
     const url = 'https://' + site;
-    const encoded = '/service/' + btoa(url);
+    const encoded = __uv$config.prefix + __uv$config.encodeUrl(url);
     openFrame(encoded, url);
   }
-
   function openFrame(url, title) {
     document.getElementById('frameUrl').textContent = '// ' + title;
     document.getElementById('frameInner').src = url;
