@@ -452,6 +452,47 @@
   document.getElementById('proxyInput').addEventListener('keydown', function(e) {
     if (e.key === 'Enter') goProxy();
   });
+<script>
+  async function registerSW() {
+    if ('serviceWorker' in navigator) {
+      await navigator.serviceWorker.register('/uv/sw.js', { scope: __uv$config.prefix });
+    }
+  }
+
+  async function goProxy() {
+    let val = document.getElementById('proxyInput').value.trim();
+    if (!val) return;
+    if (!val.startsWith('http')) val = 'https://' + val;
+    try {
+      await registerSW();
+    } catch(e) { console.warn(e); }
+    const encoded = __uv$config.prefix + __uv$config.encodeUrl(val);
+    openFrame(encoded, val);
+  }
+
+  async function go(site) {
+    const url = 'https://' + site;
+    try {
+      await registerSW();
+    } catch(e) { console.warn(e); }
+    const encoded = __uv$config.prefix + __uv$config.encodeUrl(url);
+    openFrame(encoded, url);
+  }
+
+  function openFrame(url, title) {
+    document.getElementById('frameUrl').textContent = '// ' + title;
+    document.getElementById('frameInner').src = url;
+    document.getElementById('frameWrap').classList.add('active');
+  }
+
+  function closeFrame() {
+    document.getElementById('frameWrap').classList.remove('active');
+    document.getElementById('frameInner').src = 'about:blank';
+  }
+
+  document.getElementById('proxyInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') goProxy();
+  });
 </script>
 </body>
 </html>
