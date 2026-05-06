@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HAPPYSEARCH</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <script src="/uv/uv.bundle.js"></script>
+<script src="/uv/uv.bundle.js"></script>
 <script src="/uv/uv.config.js"></script>
 <style>
   :root {
@@ -36,8 +36,6 @@
     pointer-events: none;
     z-index: 9999;
   }
-
-  /* NAV */
   nav {
     display: flex;
     align-items: center;
@@ -50,15 +48,11 @@
   .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.15em; color: var(--fg); text-decoration: none; }
   .nav-logo span { color: var(--dim); }
   .nav-tag { font-size: 0.62rem; color: var(--dim); letter-spacing: 0.1em; }
-
-  /* TICKER */
   .ticker { border-bottom: 1px solid var(--border); overflow: hidden; padding: 0.5rem 0; background: var(--mid); }
   .ticker-inner { display: flex; gap: 4rem; animation: ticker 22s linear infinite; white-space: nowrap; }
   .ticker-inner span { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--dim); flex-shrink: 0; }
   .ticker-inner span b { color: var(--fg); }
   @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-  /* MAIN */
   main {
     flex: 1;
     display: flex;
@@ -69,8 +63,6 @@
     position: relative;
     overflow: hidden;
   }
-
-  /* BIG BG TEXT */
   .bg-word {
     position: absolute;
     font-family: 'Bebas Neue', sans-serif;
@@ -85,37 +77,11 @@
     transform: translate(-50%, -50%);
     white-space: nowrap;
   }
-
-  /* CORNER DECORATIONS */
-  .corner {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    opacity: 0.25;
-  }
+  .corner { position: absolute; width: 40px; height: 40px; opacity: 0.25; }
   .corner-tl { top: 2rem; left: 2rem; border-top: 1px solid var(--fg); border-left: 1px solid var(--fg); }
   .corner-tr { top: 2rem; right: 2rem; border-top: 1px solid var(--fg); border-right: 1px solid var(--fg); }
   .corner-bl { bottom: 2rem; left: 2rem; border-bottom: 1px solid var(--fg); border-left: 1px solid var(--fg); }
   .corner-br { bottom: 2rem; right: 2rem; border-bottom: 1px solid var(--fg); border-right: 1px solid var(--fg); }
-
-  /* CROSSHAIR CENTER */
-  .crosshair {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 16px; height: 16px;
-    pointer-events: none;
-    opacity: 0.08;
-  }
-  .crosshair::before, .crosshair::after {
-    content: '';
-    position: absolute;
-    background: var(--fg);
-  }
-  .crosshair::before { width: 1px; height: 100%; left: 50%; top: 0; }
-  .crosshair::after { height: 1px; width: 100%; top: 50%; left: 0; }
-
-  /* CONTENT */
   .content {
     position: relative;
     z-index: 1;
@@ -125,203 +91,40 @@
     gap: 2.5rem;
     width: 100%;
     max-width: 680px;
+    animation: fadeIn 0.6s ease both;
   }
-
-  /* TITLE BLOCK */
   .title-block { text-align: center; }
-  .title-label {
-    font-size: 0.62rem;
-    letter-spacing: 0.25em;
-    color: var(--dim);
-    text-transform: uppercase;
-    margin-bottom: 0.8rem;
-  }
+  .title-label { font-size: 0.62rem; letter-spacing: 0.25em; color: var(--dim); text-transform: uppercase; margin-bottom: 0.8rem; }
   .title-label::before { content: '[ '; }
   .title-label::after { content: ' ]'; }
-  .main-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(4rem, 12vw, 8rem);
-    line-height: 0.9;
-    letter-spacing: 0.06em;
-  }
+  .main-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem, 12vw, 8rem); line-height: 0.9; letter-spacing: 0.06em; }
   .main-title .dim { color: var(--dim); }
-
-  /* DECO LINE */
-  .deco-line {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    width: 100%;
-  }
-  .deco-line::before, .deco-line::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(to right, transparent, var(--border));
-  }
-  .deco-line::after {
-    background: linear-gradient(to left, transparent, var(--border));
-  }
-  .deco-line-inner {
-    font-size: 0.58rem;
-    letter-spacing: 0.2em;
-    color: var(--border);
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-
-  /* SEARCH BAR */
+  .deco-line { display: flex; align-items: center; gap: 1rem; width: 100%; }
+  .deco-line::before { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--border)); }
+  .deco-line::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to left, transparent, var(--border)); }
+  .deco-line-inner { font-size: 0.58rem; letter-spacing: 0.2em; color: var(--border); text-transform: uppercase; white-space: nowrap; }
   .search-wrap { width: 100%; }
-  .search-box {
-    display: flex;
-    align-items: stretch;
-    border: 1px solid var(--fg);
-    width: 100%;
-    position: relative;
-  }
-  .search-box::before {
-    content: '';
-    position: absolute;
-    top: -4px; left: -4px; right: -4px; bottom: -4px;
-    border: 1px solid var(--border);
-    pointer-events: none;
-  }
-  .search-prefix {
-    background: var(--fg);
-    color: var(--bg);
-    padding: 0 1.1rem;
-    font-size: 0.62rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    font-weight: 700;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-  .search-input {
-    flex: 1;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: var(--fg);
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.9rem;
-    padding: 1rem 1.2rem;
-    caret-color: #fff;
-    min-width: 0;
-  }
+  .search-box { display: flex; align-items: stretch; border: 1px solid var(--fg); width: 100%; position: relative; }
+  .search-box::before { content: ''; position: absolute; top: -4px; left: -4px; right: -4px; bottom: -4px; border: 1px solid var(--border); pointer-events: none; }
+  .search-prefix { background: var(--fg); color: var(--bg); padding: 0 1.1rem; font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; display: flex; align-items: center; font-weight: 700; white-space: nowrap; flex-shrink: 0; }
+  .search-input { flex: 1; background: transparent; border: none; outline: none; color: var(--fg); font-family: 'IBM Plex Mono', monospace; font-size: 0.9rem; padding: 1rem 1.2rem; caret-color: #fff; min-width: 0; }
   .search-input::placeholder { color: var(--border); }
-  .search-btn {
-    background: transparent;
-    border: none;
-    border-left: 1px solid var(--fg);
-    color: var(--fg);
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 0 1.5rem;
-    cursor: pointer;
-    transition: background 0.12s, color 0.12s;
-    flex-shrink: 0;
-  }
+  .search-btn { background: transparent; border: none; border-left: 1px solid var(--fg); color: var(--fg); font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0 1.5rem; cursor: pointer; transition: background 0.12s, color 0.12s; flex-shrink: 0; }
   .search-btn:hover { background: var(--fg); color: var(--bg); }
-
-  /* QUICK TAGS */
-  .quick-tags {
-    display: flex;
-    gap: 0.6rem;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .qtag {
-    font-size: 0.62rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--dim);
-    border: 1px solid var(--border);
-    padding: 0.3rem 0.8rem;
-    cursor: pointer;
-    transition: color 0.12s, border-color 0.12s;
-    background: none;
-    font-family: 'IBM Plex Mono', monospace;
-  }
+  .quick-tags { display: flex; gap: 0.6rem; flex-wrap: wrap; justify-content: center; }
+  .qtag { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); border: 1px solid var(--border); padding: 0.3rem 0.8rem; cursor: pointer; transition: color 0.12s, border-color 0.12s; background: none; font-family: 'IBM Plex Mono', monospace; }
   .qtag:hover { color: var(--fg); border-color: var(--dim); }
-
-  /* STATUS ROW */
-  .status-row {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    font-size: 0.6rem;
-    color: var(--border);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-  .status-dot {
-    width: 5px; height: 5px;
-    background: var(--fg);
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: 0.4rem;
-    animation: pulse 2s ease infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-  }
-
-  /* CREATOR SECTION */
-  .creator {
-    width: 100%;
-    border-top: 1px solid var(--border);
-    padding: 2.5rem 2.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 1rem;
-    background: var(--mid);
-  }
+  .status-row { display: flex; align-items: center; gap: 1.5rem; font-size: 0.6rem; color: var(--border); letter-spacing: 0.1em; text-transform: uppercase; }
+  .status-dot { width: 5px; height: 5px; background: var(--fg); border-radius: 50%; display: inline-block; margin-right: 0.4rem; animation: pulse 2s ease infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .creator { width: 100%; border-top: 1px solid var(--border); padding: 2.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; background: var(--mid); animation: fadeIn 0.6s 0.2s ease both; }
   .creator-left { display: flex; flex-direction: column; gap: 0.4rem; }
-  .creator-tag {
-    font-size: 0.58rem;
-    letter-spacing: 0.2em;
-    color: var(--border);
-    text-transform: uppercase;
-  }
-  .creator-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.4rem;
-    letter-spacing: 0.1em;
-    color: var(--fg);
-  }
-  .creator-msg {
-    font-size: 0.68rem;
-    color: var(--dim);
-    line-height: 1.7;
-    max-width: 420px;
-  }
-  .creator-right {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 0.4rem;
-  }
-  .creator-version {
-    font-size: 0.6rem;
-    color: var(--border);
-    letter-spacing: 0.15em;
-  }
-  .creator-sig {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2rem;
-    color: rgba(255,255,255,0.06);
-    letter-spacing: 0.05em;
-  }
-
-  /* FRAME */
+  .creator-tag { font-size: 0.58rem; letter-spacing: 0.2em; color: var(--border); text-transform: uppercase; }
+  .creator-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 0.1em; color: var(--fg); }
+  .creator-msg { font-size: 0.68rem; color: var(--dim); line-height: 1.7; max-width: 420px; }
+  .creator-right { display: flex; flex-direction: column; align-items: flex-end; gap: 0.4rem; }
+  .creator-version { font-size: 0.6rem; color: var(--border); letter-spacing: 0.15em; }
+  .creator-sig { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: rgba(255,255,255,0.06); letter-spacing: 0.05em; }
   .frame-wrap { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 500; display: none; flex-direction: column; }
   .frame-wrap.active { display: flex; }
   .frame-bar { display: flex; align-items: center; gap: 1rem; padding: 0.7rem 1.2rem; border-bottom: 1px solid var(--border); flex-shrink: 0; }
@@ -329,10 +132,7 @@
   .frame-close { background: none; border: 1px solid var(--border); color: var(--fg); font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; padding: 0.3rem 0.9rem; cursor: pointer; letter-spacing: 0.1em; transition: background 0.12s; }
   .frame-close:hover { background: var(--fg); color: var(--bg); }
   .frame-inner { flex: 1; border: none; width: 100%; }
-
   @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-  .content { animation: fadeIn 0.6s ease both; }
-  .creator { animation: fadeIn 0.6s 0.2s ease both; }
 </style>
 </head>
 <body>
@@ -363,7 +163,6 @@
   <div class="corner corner-br"></div>
 
   <div class="content">
-
     <div class="title-block">
       <div class="title-label">v1.0 -- browse free</div>
       <div class="main-title">HAPPY<br><span class="dim">SEARCH</span></div>
@@ -400,7 +199,6 @@
       <span>// no logs</span>
       <span>// v1.0</span>
     </div>
-
   </div>
 </main>
 
@@ -425,74 +223,45 @@
 </div>
 
 <script>
- function goProxy() {
-    let val = document.getElementById('proxyInput').value.trim();
-    if (!val) return;
-    if (!val.startsWith('http')) val = 'https://' + val;
-    const encoded = __uv$config.prefix + __uv$config.encodeUrl(val);
-    openFrame(encoded, val);
-  }
-
-  function go(site) {
-    const url = 'https://' + site;
-    const encoded = __uv$config.prefix + __uv$config.encodeUrl(url);
-    openFrame(encoded, url);
-  }
-  function openFrame(url, title) {
+  window.openFrame = function(url, title) {
     document.getElementById('frameUrl').textContent = '// ' + title;
     document.getElementById('frameInner').src = url;
     document.getElementById('frameWrap').classList.add('active');
   }
 
-  function closeFrame() {
+  window.closeFrame = function() {
     document.getElementById('frameWrap').classList.remove('active');
     document.getElementById('frameInner').src = 'about:blank';
   }
 
-  document.getElementById('proxyInput').addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') goProxy();
-  });
-<script>
-  async function registerSW() {
+  window.registerSW = async function() {
     if ('serviceWorker' in navigator) {
       await navigator.serviceWorker.register('/uv/sw.js', { scope: __uv$config.prefix });
     }
   }
 
-  async function goProxy() {
+  window.goProxy = async function() {
     let val = document.getElementById('proxyInput').value.trim();
     if (!val) return;
     if (!val.startsWith('http')) val = 'https://' + val;
-    try {
-      await registerSW();
-    } catch(e) { console.warn(e); }
+    try { await window.registerSW(); } catch(e) { console.warn(e); }
     const encoded = __uv$config.prefix + __uv$config.encodeUrl(val);
-    openFrame(encoded, val);
+    window.openFrame(encoded, val);
   }
 
-  async function go(site) {
+  window.go = async function(site) {
     const url = 'https://' + site;
-    try {
-      await registerSW();
-    } catch(e) { console.warn(e); }
+    try { await window.registerSW(); } catch(e) { console.warn(e); }
     const encoded = __uv$config.prefix + __uv$config.encodeUrl(url);
-    openFrame(encoded, url);
+    window.openFrame(encoded, url);
   }
 
-  function openFrame(url, title) {
-    document.getElementById('frameUrl').textContent = '// ' + title;
-    document.getElementById('frameInner').src = url;
-    document.getElementById('frameWrap').classList.add('active');
-  }
-
-  function closeFrame() {
-    document.getElementById('frameWrap').classList.remove('active');
-    document.getElementById('frameInner').src = 'about:blank';
-  }
-
-  document.getElementById('proxyInput').addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') goProxy();
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('proxyInput').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') window.goProxy();
+    });
   });
 </script>
+
 </body>
 </html>
